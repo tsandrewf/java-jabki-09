@@ -18,7 +18,7 @@ public class Main {
         {
             String word = "java";
             System.out.println();
-            System.out.printf("В множестве содержится %sслово \"%s\"\n", (stringSet.contains(word) ? "" : "не "), word);
+            System.out.printf("В множестве %sсодержится слово \"%s\"\n", (stringSet.contains(word) ? "" : "не "), word);
         }
 
         // Удалите слово "python" из множества (если оно есть)
