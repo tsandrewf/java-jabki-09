@@ -12,6 +12,7 @@ class MainTest {
         assertTrue(Main.areAnagrams("росинка","соринка"));
         assertTrue(Main.areAnagrams("каратист","артистка"));
         assertFalse(Main.areAnagrams("вперед", "назад"));
+        assertTrue(Main.areAnagrams("Росинка","Соринка"));
     }
 
     @Test
@@ -22,13 +23,7 @@ class MainTest {
 
     @Test
     void getBestStudentTest() {
-        HashMap<String, Integer> studentsScoreMap = new HashMap<>(){{
-            put("John", 1);
-            put("Sam", 2);
-            put("Brendan", 3);
-            put("Albert", 4);
-            put("Steven", 5);
-        }};
+        HashMap<String, Integer> studentsScoreMap = new HashMap<>(Map.of("John", 1, "Sam", 2, "Brendan", 3, "Albert", 4, "Steven", 5));
 
         assertEquals("Steven", Main.getBestStudent(studentsScoreMap));
     }

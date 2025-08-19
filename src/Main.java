@@ -1,9 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -62,10 +57,16 @@ public class Main {
         gradeForSubjectHashMap.remove("Physics");
     }
 
-    public static HashMap<String, Integer> stringToHashMap(String string) {
+    // Создайте Map<String, Set<String>> — ключ: слово, значение: набор синонимов
+    static Map<String, Set<String>> synonymMap = new HashMap<>(){{
+        put("большой", new HashSet<>(List.of("огромный", "гигантский", "великий", "массивный")));
+        put("маленький", new HashSet<>(List.of("небольшой", "крошечный", "миниатюрный", "мелкий")));
+    }};
+
+    static HashMap<String, Integer> stringToAnagramHashMap(String string) {
         HashMap<String, Integer> stringHashMap = new HashMap<>();
         for (int i = 0; i < string.length(); i++) {
-            String key = String.valueOf(string.charAt(i));
+            String key = String.valueOf(string.charAt(i)).toUpperCase(Locale.ROOT);
             stringHashMap.put(key, stringHashMap.getOrDefault(key, 0) + 1);
         }
 
@@ -74,7 +75,7 @@ public class Main {
 
     // Метод, который возвращает true, если строки состоят из одинаковых символов
     public static boolean areAnagrams(String a, String b) {
-        return stringToHashMap(a).equals(stringToHashMap(b));
+        return stringToAnagramHashMap(a).equals(stringToAnagramHashMap(b));
     }
 
     // Метод, который возвращает true, если в списке есть дубликаты
@@ -89,22 +90,16 @@ public class Main {
     public static String getBestStudent(Map<String, Integer> studentsMap) {
         String bestStudentName = "";
         Integer bestScore = Integer.MIN_VALUE;
-        for (String key : studentsMap.keySet()) {
-            Integer score = studentsMap.get(key);
-            if (score > bestScore) {
-                bestStudentName = key;
-                bestScore = score;
+        for (Map.Entry<String, Integer> entry : studentsMap.entrySet()) {
+            if (entry.getValue() > bestScore) {
+                bestStudentName = entry.getKey();
+                bestScore = entry.getValue();
             }
         }
 
         return bestStudentName;
     }
 
-    // Создайте Map<String, Set<String>> — ключ: слово, значение: набор синонимов
-    public static Map<String, Set<String>> synonymMap = new HashMap<>(){{
-        put("большой", new HashSet<>(List.of("огромный", "гигантский", "великий", "массивный")));
-        put("маленький", new HashSet<>(List.of("небольшой", "крошечный", "миниатюрный", "мелкий")));
-    }};
     // Реализуйте метод addSynonym(String word, String synonym)
     public static void addSynonym(String word, String synonym) {
         if (!synonymMap.containsKey(word)) {
