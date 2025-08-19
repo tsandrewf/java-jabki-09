@@ -33,13 +33,7 @@ public class Main {
         System.out.printf("Количество уникальных слов: %s\n", stringSet.size());
 
         // Создайте HashMap<String, Integer> с названиями предметов и оценками
-        HashMap<String, Integer> gradeForSubjectHashMap = new HashMap<>(){{
-            put("Math", 5);
-            put("Physics", 4);
-            put("Literature", 5);
-            put("English", 4);
-            put("Biology", 5);
-        }};
+        Map<String, Integer> gradeForSubjectHashMap = new HashMap<>(Map.of("Math", 5, "Physics", 4, "Literature", 5, "English", 4, "Biology", 5));
         // Выведите все пары ключ-значение
         System.out.println();
         System.out.println("Пары ключ-значение:");
